@@ -42,10 +42,25 @@ public function show($id)
 /**
 * Update the specified resource in storage.
 */
-public function update(Request $request, string $id)
-{
-//
-}
+public function update(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+        ]);
+
+        $product->update($validated);
+
+        return response()->json($product);
+    }
+
 
 /**
 * Remove the specified resource from storage.
