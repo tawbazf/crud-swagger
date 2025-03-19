@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+     /**
+     * @OA\Get(
+     *     path="/api/products",
+     *     summary="Liste des produits",
+     *     @OA\Response(response="200", description="Liste des produits")
+     * )
+     */
 public function index()
 {
 return Product::all();
