@@ -5,14 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
-
+/**
+ * @OA\Schema(
+ *   schema="Product",
+ *   type="object",
+ *   required={"name","description","price"},
+ *   @OA\Property(property="id", type="integer", example=1),
+ *   @OA\Property(property="name", type="string", example="Nom du produit"),
+ *   @OA\Property(property="description", type="string", example="Description"),
+ *   @OA\Property(property="price", type="number", format="float", example=19.99),
+ *   @OA\Property(property="created_at", type="string", format="date-time"),
+ *   @OA\Property(property="updated_at", type="string", format="date-time")
+ * )
+ */
 class ProductController extends Controller
 {
-  /**
+/**
  * @OA\Get(
  *     path="/api/products",
- *     summary="Liste des produits",
- *     tags={"Product"},
  *     @OA\Response(
  *         response=200,
  *         description="Liste des produits",
