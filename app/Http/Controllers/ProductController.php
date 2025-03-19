@@ -64,9 +64,16 @@ public function update(Request $request, $id)
 
 /**
 * Remove the specified resource from storage.
-*/
-public function destroy(string $id)
+*/public function destroy($id)
 {
-//
+    $product = Product::find($id);
+
+    if (!$product) {
+        return response()->json(['message' => 'Product not found'], 404);
+    }
+
+    $product->delete();
+
+    return response()->json(['message' => 'Product deleted successfully']);
 }
 }
