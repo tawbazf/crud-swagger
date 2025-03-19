@@ -17,9 +17,21 @@ public function index()
 {
 return Product::all();
 }
-/**
-* Store a newly created resource in storage.
-*/
+  /**
+     * @OA\Post(
+     *     path="/api/products",
+     *     summary="Créer un produit",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="name", type="string"),
+     *             @OA\Property(property="description", type="string"),
+     *             @OA\Property(property="price", type="number", format="float")
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="Produit créé")
+     * )
+     */
 public function store(Request $request)
 {
     $validated = $request->validate([
