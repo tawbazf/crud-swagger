@@ -1,0 +1,108 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Laravel API",
+      "description": "Documentation de l'API Laravel pour le CRUD sur l'entité Product.",
+      "version": "1.0.0",
+      "contact": {
+        "email": "tawbazehaf@gmail.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "paths": {
+      "/api/products": {
+        "get": {
+          "tags": ["Product"],
+          "summary": "Lister tous les produits",
+          "operationId": "listProducts",
+          "responses": {
+            "200": {
+              "description": "Liste des produits",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Product"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/products/{id}": {
+        "get": {
+          "tags": ["Product"],
+          "summary": "Récupérer un produit spécifique",
+          "operationId": "getProductById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID du produit",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Produit trouvé",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Produit non trouvé"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Product": {
+          "type": "object",
+          "required": ["name", "description", "price"],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "name": {
+              "type": "string",
+              "example": "Nom du produit"
+            },
+            "description": {
+              "type": "string",
+              "example": "Description détaillée du produit"
+            },
+            "price": {
+              "type": "number",
+              "format": "float",
+              "example": 19.99
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updated_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    }
+  }
+  
