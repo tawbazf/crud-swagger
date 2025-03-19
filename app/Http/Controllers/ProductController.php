@@ -78,8 +78,35 @@ public function show($id)
 }
 
 /**
-* Update the specified resource in storage.
-*/
+ * @OA\Put(
+ *     path="/api/products/{id}",
+ *     summary="Mettre à jour un produit",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID du produit",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="name", type="string"),
+ *             @OA\Property(property="description", type="string"),
+ *             @OA\Property(property="price", type="number", format="float")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response="200",
+ *         description="Produit mis à jour",
+ *         @OA\JsonContent(ref="#/components/schemas/Product")
+ *     ),
+ *     @OA\Response(
+ *         response="404",
+ *         description="Produit non trouvé"
+ *     )
+ * )
+ */
 public function update(Request $request, $id)
     {
         $product = Product::find($id);
