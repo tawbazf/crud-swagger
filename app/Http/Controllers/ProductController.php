@@ -45,8 +45,27 @@ public function store(Request $request)
     return response()->json($product, 201);
 }
 /**
-* Display the specified resource.
-*/
+ * @OA\Get(
+ *     path="/api/products/{id}",
+ *     summary="Récupérer un produit",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID du produit",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response="200",
+ *         description="Produit trouvé",
+ *         @OA\JsonContent(ref="#/components/schemas/Product")
+ *     ),
+ *     @OA\Response(
+ *         response="404",
+ *         description="Produit non trouvé"
+ *     )
+ * )
+ */
 public function show($id)
 {
     $product = Product::find($id);
