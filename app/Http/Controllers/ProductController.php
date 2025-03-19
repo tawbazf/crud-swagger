@@ -28,9 +28,15 @@ public function store(Request $request)
 /**
 * Display the specified resource.
 */
-public function show(string $id)
+public function show($id)
 {
-//
+    $product = Product::find($id);
+
+    if (!$product) {
+        return response()->json(['message' => 'Product not found'], 404);
+    }
+
+    return response()->json($product);
 }
 
 /**
