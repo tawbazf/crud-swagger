@@ -128,8 +128,27 @@ public function update(Request $request, $id)
 
 
 /**
-* Remove the specified resource from storage.
-*/public function destroy($id)
+ * @OA\Delete(
+ *     path="/api/products/{id}",
+ *     summary="Supprimer un produit",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID du produit",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response="200",
+ *         description="Produit supprimé"
+ *     ),
+ *     @OA\Response(
+ *         response="404",
+ *         description="Produit non trouvé"
+ *     )
+ * )
+ */
+public function destroy($id)
 {
     $product = Product::find($id);
 
